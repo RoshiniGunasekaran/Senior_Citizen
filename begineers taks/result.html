@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Citizen Result</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Senior Citizen Filter Result</h1>
+    </header>
+    <main>
+        <section class="result-container">
+            <h2>Senior Citizens (Age 65 and above):</h2>
+            <ul id="seniorList"></ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Website</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const seniors = JSON.parse(params.get('seniors') || '[]');
+
+            const seniorList = document.getElementById('seniorList');
+            if (seniors.length > 0) {
+                seniors.forEach(person => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${person.name}: ${person.age} years`;
+                    seniorList.appendChild(listItem);
+                });
+            } else {
+                seniorList.textContent = 'No senior citizens found.';
+            }
+        });
+    </script>
+</body>
+</html>
